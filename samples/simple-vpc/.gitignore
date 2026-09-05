@@ -1,0 +1,6 @@
+.terraform/
+terraform.d/
+.terraform.lock.hcl
+*.tfstate
+*.tfstate.*
+generated.xal

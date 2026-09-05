@@ -1,0 +1,8 @@
+.env
+.terraform/
+terraform.d/plugins/
+.terraform.lock.hcl
+*.tfstate
+*.tfstate.*
+terraform-provider-xaligo
+generated.xal

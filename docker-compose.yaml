@@ -1,0 +1,27 @@
+name: ${COMPOSE_PROJECT_NAME:-terraform-provider-xaligo}
+
+services:
+  ministack:
+    image: ${MINISTACK_IMAGE:-ministackorg/ministack:1.5.3}
+    ports:
+      - "127.0.0.1:${MINISTACK_PORT:-4566}:4566"
+    environment:
+      MINISTACK_REGION: ${MINISTACK_REGION:-ap-northeast-1}
+      MINISTACK_ACCOUNT_ID: ${MINISTACK_ACCOUNT_ID:-000000000000}
+      PERSIST_STATE: "${MINISTACK_PERSIST_STATE:-1}"
+      STATE_DIR: /data/ministack-state
+    volumes:
+      - ministack-data:/data
+    healthcheck:
+      test:
+        - CMD
+        - python
+        - -c
+        - import urllib.request; urllib.request.urlopen('http://localhost:4566/_ministack/health')
+      interval: 5s
+      timeout: 3s
+      retries: 12
+      start_period: 2s
+
+volumes:
+  ministack-data:

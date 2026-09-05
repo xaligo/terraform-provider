@@ -1,0 +1,12 @@
+.git
+.github
+.env
+.terraform
+**/.terraform
+terraform.d
+**/.terraform.lock.hcl
+**/*.tfstate
+**/*.tfstate.*
+**/generated.xal
+terraform-provider-xaligo
+output

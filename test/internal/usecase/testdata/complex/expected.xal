@@ -1,0 +1,66 @@
+<xaligo version="1">
+  <frames>
+    <frame id="complex" title="Complex AWS Architecture" width="3890" height="2752" item-size="32">
+      <aws-cloud id="xaligo-aws-cloud" title="AWS Cloud" row="2496" align="top-left" overflow="visible">
+        <generic-group id="xaligo-aws-global-services" title="Global services" row="160">
+          <item id="1479" name="aws_iam_role-worker"></item>
+        </generic-group>
+        <region id="xaligo-aws-region-ap-northeast-1" title="Region: ap-northeast-1" row="1712">
+          <generic-group id="xaligo-aws-region-ap-northeast-1-services" title="Regional services" row="288">
+            <row gap="20" overflow="visible">
+              <col row="160" span="3" class="pa-1">
+                <item id="1545" name="aws_cloudwatch_log_group-worker"></item>
+              </col>
+              <col row="224" span="6">
+                <container id="application-services" gap="0" layout="horizontal" align="middle-spread" overflow="visible">
+                  <item id="1783" name="aws_lambda_function-worker"></item>
+                  <item id="1642" name="aws_s3_bucket-artifacts"></item>
+                </container>
+              </col>
+              <col row="160" span="3" align="middle-center">
+                <item id="1508" name="aws_sqs_queue-jobs"></item>
+              </col>
+            </row>
+          </generic-group>
+          <vpc id="aws_vpc-main" title="complex-vpc (10.42.0.0/16)" row="1344">
+            <security-group id="aws_security_group-application" title="aws_security_group.application" row="64"></security-group>
+            <generic-group id="aws_vpc-main-resources" title="VPC resources" row="368">
+              <item id="1581" name="aws_internet_gateway-main"></item>
+              <item id="1592" name="aws_lb-application"></item>
+              <rectangle id="aws_lb_target_group-application" title="aws_lb_target_group.application"></rectangle>
+              <rectangle id="aws_route_table-public" title="aws_route_table.public"></rectangle>
+            </generic-group>
+            <availability-zone id="aws_vpc-main-availability-zone-ap-northeast-1a" title="AZ: ap-northeast-1a" row="528">
+              <generic-group id="aws_subnet-private_a" title="Subnet: private-a (10.42.11.0/24)" row="160">
+                <item id="1790" name="aws_instance-worker"></item>
+              </generic-group>
+              <public-subnet id="aws_subnet-public_a" title="Subnet: public-a (10.42.1.0/24)" row="288">
+                <item id="1790" name="aws_instance-web"></item>
+                <item id="1582" name="aws_nat_gateway-main"></item>
+                <rectangle id="aws_route_table_association-public_a" title="aws_route_table_association.public_a"></rectangle>
+              </public-subnet>
+            </availability-zone>
+            <availability-zone id="aws_vpc-main-availability-zone-ap-northeast-1c" title="AZ: ap-northeast-1c" row="272">
+              <generic-group id="aws_subnet-private_b" title="Subnet: private-c (10.42.12.0/24)" row="64"></generic-group>
+              <public-subnet id="aws_subnet-public_b" title="Subnet: public-c (10.42.2.0/24)" row="128">
+                <rectangle id="aws_route_table_association-public_b" title="aws_route_table_association.public_b"></rectangle>
+              </public-subnet>
+            </availability-zone>
+          </vpc>
+        </region>
+        <generic-group id="xaligo-aws-unresolved-resources" title="AWS resources (scope unresolved)" row="528">
+          <item id="117" name="aws_db_instance-main"></item>
+          <rectangle id="aws_db_subnet_group-main" title="aws_db_subnet_group.main"></rectangle>
+          <rectangle id="aws_eip-nat" title="aws_eip.nat"></rectangle>
+          <rectangle id="aws_lambda_event_source_mapping-jobs" title="aws_lambda_event_source_mapping.jobs"></rectangle>
+          <item id="1182" name="aws_lb_listener-https"></item>
+          <rectangle id="data-aws_ami-linux" title="data.aws_ami.linux"></rectangle>
+        </generic-group>
+      </aws-cloud>
+      <generic-group id="xaligo-terraform-resources" title="Terraform resources" row="208">
+        <rectangle id="module-observability" title="module.observability"></rectangle>
+        <rectangle id="terraform_data-release" title="terraform_data.release"></rectangle>
+      </generic-group>
+    </frame>
+  </frames>
+</xaligo>

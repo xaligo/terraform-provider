@@ -1,0 +1,17 @@
+<xaligo version="1">
+  <frames>
+    <frame id="main" title="Simple VPC" width="1280" height="720" item-size="32">
+      <aws-cloud id="xaligo-aws-cloud" title="AWS Cloud">
+        <region id="xaligo-aws-region-ap-northeast-1" title="Region: ap-northeast-1">
+          <vpc id="aws_vpc-this" title="sample-vpc (10.0.0.0/16)">
+            <availability-zone id="aws_vpc-this-availability-zone-ap-northeast-1a" title="AZ: ap-northeast-1a">
+              <generic-group id="aws_subnet-public" title="Subnet: sample-public-a (10.0.1.0/24)">
+                <item id="1790" name="aws_instance-web"></item>
+              </generic-group>
+            </availability-zone>
+          </vpc>
+        </region>
+      </aws-cloud>
+    </frame>
+  </frames>
+</xaligo>
