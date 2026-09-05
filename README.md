@@ -274,9 +274,11 @@ upstream refresh diff.
 
 ## Terraform Public Registry release
 
-The tag-triggered `.github/workflows/release.yml` workflow builds supported
-platform archives, signs their checksum with GPG, and creates the GitHub
-Release consumed by the Terraform Public Registry.
+Each push to `main` triggers `.github/workflows/release.yml`. After tests pass,
+the workflow increments the patch component of the latest strict SemVer tag
+(starting at `v0.1.0`), builds supported platform archives, signs their
+checksum with GPG, and creates the GitHub Release consumed by the Terraform
+Public Registry.
 
 Publication requires the public GitHub repository to be named exactly
 `xaligo/terraform-provider-xaligo`. Add the RSA public key to the `xaligo`
@@ -287,10 +289,12 @@ secrets:
   lines.
 - `PASSPHRASE`: passphrase for that private key.
 
-After registering the provider repository in the Public Registry, publish a
-new immutable semantic version by pushing a tag such as `v0.1.0`. The workflow
-uses the automatically provided `GITHUB_TOKEN`; an HCP Terraform API token is
-not required for a public provider release.
+After registering the provider repository in the Public Registry, merge or
+push a commit to `main`. The workflow creates the immutable version tag and
+release automatically. The workflow uses the automatically provided
+`GITHUB_TOKEN`; an HCP Terraform API token is not required for a public
+provider release. Serialize or squash closely related changes before merging,
+because every `main` commit produces a provider version.
 
 ## Development checks
 
